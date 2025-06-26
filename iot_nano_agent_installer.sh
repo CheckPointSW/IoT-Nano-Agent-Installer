@@ -9,6 +9,7 @@
 # Constants
 MANAGER_VERSION="1.0"
 GIT_REPO="CheckPointSW/IoT-Nano-Agent-Installer"  # Updated repo.
+GIT_BRANCH="main"  # Get manifests from this branch.
 DEFAULT_INSTALL_PATH="/etc/cp/"
 INSTALLED_VERSION_FILE="$DEFAULT_INSTALL_PATH/VERSION"
 MANIFEST_TEMP="/tmp/iot_nano_agent_manifest.txt"
@@ -193,7 +194,7 @@ get_installed_version() {
 
 # Download the manifest file using raw.githubusercontent.com.
 download_manifest() {
-    API_URL="https://api.github.com/repos/${GIT_REPO}/contents/manifests/${PLATFORM}"
+    API_URL="https://api.github.com/repos/${GIT_REPO}/contents/manifests/${PLATFORM}?ref=${GIT_BRANCH}"  # Use GIT_BRANCH
     echo "Downloading manifest from ${API_URL}"
     curl -L $CURL_OPTS \
          -H "Accept: application/vnd.github.v3.raw" \
