@@ -35,24 +35,32 @@ The IoT Nano Agent Installer is a shell script that automates the process of ins
 ## Getting Started
 
 To get started with the IoT Nano Agent Installer, you have two options:  
-**Option 1: Clone the Repository** or **Option 2: Download the Script Directly**.  
+**Option 1: Download the Installer Directly** or **Option 2: Clone the Repository**.  
 Choose one of the following methods:
 
-### Option 1: Clone the Repository
-```sh
-git clone git@github.com:romanlo993/IoT-Nano-Agent-Installer.git
-cd IoT-Nano-Agent-Installer
-sudo ./iot_nano_agent_installer.sh install
-```
+### Option 1: Download the Installer Directly
+To download only the installer, you can use the GitHub GUI or `wget`:
 
-### Option 2: Download the Script Directly
-If you prefer not to clone the repository, you can download the script using the GitHub GUI:
+#### Using GitHub GUI:
 1. Navigate to the [`iot_nano_agent_installer.sh`](./iot_nano_agent_installer.sh).
 2. Click on the "Download raw file" button to download the file to your system.
 
-Once downloaded, make the script executable and run it:
+#### Using `wget`:
+Run the following command to download the installer directly:
+```sh
+wget https://raw.githubusercontent.com/CheckPointSW/IoT-Nano-Agent-Installer/main/iot_nano_agent_installer.sh
+```
+
+#### Once downloaded, make the script executable and run it:
 ```sh
 chmod +x iot_nano_agent_installer.sh
+sudo ./iot_nano_agent_installer.sh install
+```
+
+### Option 2: Clone the Repository
+```sh
+git clone git@github.com:romanlo993/IoT-Nano-Agent-Installer.git
+cd IoT-Nano-Agent-Installer
 sudo ./iot_nano_agent_installer.sh install
 ```
 
