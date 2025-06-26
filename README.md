@@ -108,7 +108,7 @@ The Nano Agent provides runtime protection through a set of **protection plugins
    - The protection must be relevant to the process being protected.
 
 ### Available Protection Plugins
-Below is a list of available protection plugins, along with links to their detailed documentation:
+Below is a list of available protection plugins, along with links to their detailed documentation. Each plugin has a sample scenario to demonstrate the protection:
 
 1. [SSH Audit](./docs/SSH_Audit.md)  
    Audits all shell commands executed via SSH, including the user and timestamp.
