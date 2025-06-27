@@ -21,7 +21,11 @@ Follow the steps below to enable the Anti Shell Injection plugin:
    [Plugins]
    PLUGINS = antisi3
    ```
-3. Save the file. The Nano Agent service will automatically apply the updated configuration.
+3. Ensure the `PREVENTION` variable is set to `True`:
+   ```ini
+   PREVENTION = True
+   ```
+4. Save the file. The Nano Agent service will automatically apply the updated configuration.
 
 ---
 
@@ -44,21 +48,25 @@ To confirm that the Anti Shell Injection plugin is working as expected, follow t
 In this section, we will test the plugin using an example of a vulnerable webserver (`si_vulnerable_webserver.sample`) and an exploit (`antisi.exploit`). The example server is designed to receive an IP address as input and ping it. This demonstrates how the plugin detects and blocks shell injection attempts. You must follow a similar process to test your own server or application.
 
 1. **Prepare the Environment**:
+   - Go to the samples directory:
+     ```sh
+     cd /etc/cp/workloadProtection/samples/
+     ```
    - Ensure no instances of the vulnerable webserver or exploit are running:
      ```sh
-     kill -9 $(pidof si_vulnerable_webserver.sample) 
+     kill -9 $(pidof si_vulnerable_webserver.sample) 2> /dev/null
      echo "" > /tmp/wlp_log.txt
      ```
    - Ensure the vulnerable webserver and exploit have executable permissions:
      ```sh
-     chmod +x /etc/cp/workloadProtection/samples/si_vulnerable_webserver.sample
-     chmod +x /etc/cp/workloadProtection/samples/antisi.exploit
+     chmod +x si_vulnerable_webserver.sample
+     chmod +x antisi.exploit
      ```
 
 2. **Demonstrate the Intended Purpose of the Server**:
    - Start the vulnerable webserver:
      ```sh
-     /etc/cp/workloadProtection/samples/si_vulnerable_webserver.sample 3333 &
+     ./si_vulnerable_webserver.sample 3333 &
      ```
    - Use the server as intended by providing a valid IP address to ping:
      ```sh
@@ -75,38 +83,38 @@ In this section, we will test the plugin using an example of a vulnerable webser
      ```
    - Stop the webserver:
      ```sh
-     kill -9 $(pidof si_vulnerable_webserver.sample)
+     kill -9 $(pidof si_vulnerable_webserver.sample) 2> /dev/null
      ```
 
 3. **Test Exploit Without Protection**:
    - Start the vulnerable webserver without the Nano Agent library:
      ```sh
-     /etc/cp/workloadProtection/samples/si_vulnerable_webserver.sample 3333 &
+     ./si_vulnerable_webserver.sample 3333 &
      ```
    - Run the exploit against the webserver:
      ```sh
-     /etc/cp/workloadProtection/samples/antisi.exploit 3333 && sleep 0.5
+     ./antisi.exploit 3333 && sleep 0.5
      ```
    - **Expected Behavior**:  
      The exploit will succeed, and you will see output indicating you have been hacked.
    - Stop the webserver:
      ```sh
-     kill -9 $(pidof si_vulnerable_webserver.sample)
+     kill -9 $(pidof si_vulnerable_webserver.sample) 2> /dev/null
      ```
 
 4. **Test Exploit With Protection**:
    - Start the vulnerable webserver with the Nano Agent library preloaded:
      ```sh
-     LD_PRELOAD=/usr/lib/libwlp-core.so /etc/cp/workloadProtection/samples/si_vulnerable_webserver.sample 3333 &
+     LD_PRELOAD=libwlp-core.so ./si_vulnerable_webserver.sample 3333 &
      ```
    - Run the exploit against the webserver:
      ```sh
-     /etc/cp/workloadProtection/samples/antisi.exploit 3333 && sleep 0.5
+     ./antisi.exploit 3333 && sleep 0.5
      ```
    - Stop the exploit and the webserver:
      ```sh
-     kill -9 $(pidof antisi.exploit) 
-     kill -9 $(pidof si_vulnerable_webserver.sample)
+     kill -9 $(pidof antisi.exploit) 2> /dev/null
+     kill -9 $(pidof si_vulnerable_webserver.sample) 2> /dev/null
      ```
 
 5. **Check the Logs**:
