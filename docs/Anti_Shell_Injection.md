@@ -12,20 +12,21 @@ Shell injection is a type of security vulnerability that occurs when an attacker
 Follow the steps below to enable the Anti Shell Injection plugin:
 
 ### Step 1: Enable the Plugin in Configuration
-1. Open the Nano Agent configuration file:
+1. Verify that the `antisi3` plugin is included in the `PLUGINS` variable:
    ```sh
-   sudo nano /etc/cp/workloadProtection/wlp.conf
+   grep "PLUGINS =" /etc/cp/workloadProtection/wlp.conf | grep "antisi3"
    ```
-2. Locate the `[Plugins]` section and ensure the `antisi3` plugin is included in the `PLUGINS` variable:
+   If the output does not include `antisi3`, edit the configuration file `wlp.conf` to add it:
    ```ini
    [Plugins]
    PLUGINS = antisi3
    ```
-3. Ensure the `PREVENTION` variable is set to `True`:
-   ```ini
-   PREVENTION = True
+2. Ensure the `PREVENTION` variable is set to `True`:
+   ```sh
+   curl -X POST http://127.0.0.1:7777/set-wlp-conf -H "Content-Type: application/json" -d '{"prevention": true}'
    ```
-4. Save the file. The Nano Agent service will automatically apply the updated configuration.
+
+3. Save the file. The Nano Agent service will automatically apply the updated configuration.
 
 ---
 
@@ -55,7 +56,6 @@ In this section, we will test the plugin using an example of a vulnerable webser
    - Ensure no instances of the vulnerable webserver or exploit are running:
      ```sh
      kill -9 $(pidof si_vulnerable_webserver.sample) 2> /dev/null
-     echo "" > /tmp/wlp_log.txt
      ```
    - Ensure the vulnerable webserver and exploit have executable permissions:
      ```sh
@@ -119,10 +119,6 @@ In this section, we will test the plugin using an example of a vulnerable webser
 
 5. **Check the Logs**:
    - Search the logs for shell injection detection:
-     ```sh
-     grep "ANTISI" /tmp/wlp_log.txt
-     ```
-   - Alternatively, check the orchestration log for detailed event information:
      ```sh
      grep "Shell Injection" /var/log/nano_agent/cp-nano-orchestration.log | tail -n 1
      ```

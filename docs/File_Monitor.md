@@ -39,14 +39,14 @@ The File Monitor plugin is a **file access control and monitoring tool** which i
 Follow the steps below to enable the File Monitor plugin:
 
 ### Step 1: Enable the Plugin in Configuration
-1. Open the Nano Agent configuration file:
+1. Verify that the `filemon` plugin is included in the `PLUGINS` variable:
    ```sh
-   sudo nano /etc/cp/workloadProtection/wlp.conf
+   grep "PLUGINS =" /etc/cp/workloadProtection/wlp.conf | grep "filemon"
    ```
-2. Locate the `[Plugins]` section and ensure the `filemon` plugin is included in the `PLUGINS` variable:
+   If the output does not include `filemon`, edit the configuration file `wlp.conf` to add it:
    ```ini
    [Plugins]
-   PLUGINS = filemon, sshd
+   PLUGINS = filemon
    ```
 3. Save the file. The Nano Agent service will automatically apply the updated configuration.
 
