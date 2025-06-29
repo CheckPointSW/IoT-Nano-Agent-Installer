@@ -31,16 +31,16 @@ The **Anti Brute Force** plugin protects web servers by limiting login attempts 
 Follow the steps below to enable the Anti Brute Force plugin:
 
 ### Step 1: Enable the Plugin in Configuration
-1. Open the Nano Agent configuration file:
+1. Verify that the `antibf` plugin is included in the `PLUGINS` variable:
    ```sh
-   sudo nano /etc/cp/workloadProtection/wlp.conf
+   grep "PLUGINS =" /etc/cp/workloadProtection/wlp.conf | grep "antibf"
    ```
-2. Locate the `[Plugins]` section and ensure the `antibf` plugin is included in the `PLUGINS` variable:
+   If the output does not include `antibf`, edit the configuration file `wlp.conf` to add it:
    ```ini
    [Plugins]
    PLUGINS = antibf
    ```
-3. Verify the rate-limiting configuration:
+2. Verify the rate-limiting configuration:
    ```ini
    # ANTIBF Ratelimit sample seconds (how many login attempts are allowed in how many seconds)
    ANTIBF_RATELIMIT_SAMPLE_SEC = 10
@@ -50,7 +50,7 @@ Follow the steps below to enable the Anti Brute Force plugin:
    ```
    Ensure these values are set according to your security requirements.
 
-4. Save the file. The Nano Agent service will automatically apply the updated configuration.
+3. Save the file. The Nano Agent service will automatically apply the updated configuration.
 
 ---
 
@@ -162,14 +162,6 @@ In this section, we will test the plugin using an example of a vulnerable webser
 
 7. **Check the Logs**:
    - Search the logs for brute force detection:
-     ```sh
-     grep "ANTIBF" /tmp/wlp_log.txt | tail -n 10
-     ```
-   - If the plugin is working correctly, you should see log entries similar to:
-     ```
-     [TIME PID TID] [ANTIBF] Ratelimit reached (4 login attempts in 10 seconds). Last IP:127.0.0.1
-     ```
-   - Alternatively, check the orchestration log for detailed event information:
      ```sh
      grep "Login Protection" /var/log/nano_agent/cp-nano-orchestration.log | tail -n 1
      ```

@@ -29,16 +29,16 @@ The SSHD Login Protection plugin mitigates this threat by:
 Follow the steps below to enable the SSHD Login Protection plugin:
 
 ### Step 1: Enable the Plugin in Configuration
-1. Open the Nano Agent configuration file:
+1. Verify that the `sshd` plugin is included in the `PLUGINS` variable:
    ```sh
-   sudo nano /etc/cp/workloadProtection/wlp.conf
+   grep "PLUGINS =" /etc/cp/workloadProtection/wlp.conf | grep "sshd"
    ```
-2. Locate the `[Plugins]` section and ensure the `sshd` plugin is included in the `PLUGINS` variable:
+   If the output does not include `sshd`, edit the configuration file `wlp.conf` to add it:
    ```ini
    [Plugins]
-   PLUGINS = sshd, antibf
+   PLUGINS = sshd
    ```
-3. Save the file. The Nano Agent service will automatically apply the updated configuration.
+2. Save the file. The Nano Agent service will automatically apply the updated configuration.
 
 ---
 
@@ -61,11 +61,13 @@ The Nano Agent requires the `LD_PRELOAD` environment variable to be set for the 
      ```sh
      sudo nano /lib/systemd/system/dropbear.service
      ```
+   > **Note:** The file name might be slightly different, such as `sshd.service` or include an `@`, such as `dropbear@.service`.
 
 3. Add or modify the `Environment` variable in the `[Service]` section:
    ```sh
    Environment="LD_PRELOAD=libwlp-core.so"
    ```
+   > **Note:** If the `Environment` variable already exists, you can add this line separately, and it will append `LD_PRELOAD` to the environment without overwriting existing variables.
 
 4. Save the file and reload the systemd configuration:
    ```sh
