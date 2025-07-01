@@ -26,9 +26,19 @@ For more detailed information, please visit the full documentation of [QUANTUM I
 
 ---
 
-## What is the IoT Nano Agent Installer?
+## Supported Platforms and Requirements
 
-The IoT Nano Agent Installer is a shell script that automates the process of installing, updating, and managing the Nano Agent on supported Linux systems. It identifies the system architecture, downloads the appropriate files from the GitHub repository, and sets up the Nano Agent for use.
+The IoT Nano Agent trial version supports the following platforms and has specific system requirements:
+
+| Platform   | Architecture            | Required `glibc` Version | Minimum Disk Space | Minimum RAM |
+|------------|-------------------------|--------------------------|--------------------|-------------|
+| **x86_64** | 64-bit Intel/AMD systems | > 2.23                  | 30 MB             | 8 MB        |
+| **aarch64**| ARM64 systems            | > 2.28                  | 30 MB             | 8 MB        |
+| **arm32**  | ARMv7l or ARMv6l systems | > 2.19                  | 30 MB             | 8 MB        |
+
+> **Note:** These are the requirements for the trial version. The **full version supports additional platforms and architectures**.
+The installer will automatically download the installation file based on the detected platform.
+It also checks for required utilities and libraries and will alert you in case any are missing.
 
 ---
 
