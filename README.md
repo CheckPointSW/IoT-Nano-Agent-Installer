@@ -34,7 +34,6 @@ The IoT Nano Agent trial version supports the following platforms and has specif
 |------------|-------------------------|--------------------------|--------------------|-------------|
 | **x86_64** | 64-bit Intel/AMD systems | > 2.23                  | 30 MB             | 8 MB        |
 | **aarch64**| ARM64 systems            | > 2.28                  | 30 MB             | 8 MB        |
-| **arm32**  | ARMv7l or ARMv6l systems | > 2.19                  | 30 MB             | 8 MB        |
 
 > **Note:** These are the requirements for the trial version. The **full version supports additional platforms and architectures**.
 The installer will automatically download the installation file based on the detected platform.
@@ -153,7 +152,7 @@ The IoT Nano Agent is designed to both prevent attacks and inform users about po
 Upon installation, the Nano Agent is configured in **detection mode** by default. This allows users to explore and understand how the agent monitors and logs events without immediately affecting the system's behavior. Detection mode is ideal for observing the agent's capabilities and ensuring compatibility with your applications.
 
 ### Prevention Mode
-Once users are comfortable with the agent's behavior, they can enable **prevention mode** to actively block malicious activities. This mode ensures that the system is protected against threats in real time.
+Once users are comfortable with the agent's behavior, they can enable **prevention mode** to actively block malicious activities. This mode ensures that the system is protected against threats in real time. Review the configuration file to move from Detection mode to Prevention mode.
 
 For more information about event logs and how to interpret them, refer to the [Logs Overview](./docs/Logs.md) documentation.
 
@@ -189,13 +188,6 @@ For more information about event logs and how to interpret them, refer to the [L
 ./nano_agent_installer -h | --help
 ```
 - Displays this help message.
-
----
-
-## Platforms Supported
-- **x86**       x86_64 systems
-- **aarch64**   ARM64 systems
-- **arm32**     ARMv7l or ARMv6l systems
 
 ---
 
