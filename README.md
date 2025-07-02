@@ -26,9 +26,18 @@ For more detailed information, please visit the full documentation of [QUANTUM I
 
 ---
 
-## What is the IoT Nano Agent Installer?
+## Supported Platforms and Requirements
 
-The IoT Nano Agent Installer is a shell script that automates the process of installing, updating, and managing the Nano Agent on supported Linux systems. It identifies the system architecture, downloads the appropriate files from the GitHub repository, and sets up the Nano Agent for use.
+The IoT Nano Agent trial version supports the following platforms and has specific system requirements:
+
+| Platform   | Architecture            | Required `glibc` Version | Minimum Disk Space | Minimum RAM |
+|------------|-------------------------|--------------------------|--------------------|-------------|
+| **x86_64** | 64-bit Intel/AMD systems | > 2.23                  | 30 MB             | 8 MB        |
+| **aarch64**| ARM64 systems            | > 2.28                  | 30 MB             | 8 MB        |
+
+> **Note:** These are the requirements for the trial version. The **full version supports additional platforms and architectures**.
+The installer will automatically download the installation file based on the detected platform.
+It also checks for required utilities and libraries and will alert you in case any are missing.
 
 ---
 
@@ -135,6 +144,20 @@ Below is a list of available protection plugins, along with links to their detai
 
 ---
 
+## Using Nano Agent
+
+The IoT Nano Agent is designed to both prevent attacks and inform users about potential security events. 
+
+### Detection Mode
+Upon installation, the Nano Agent is configured in **detection mode** by default. This allows users to explore and understand how the agent monitors and logs events without immediately affecting the system's behavior. Detection mode is ideal for observing the agent's capabilities and ensuring compatibility with your applications.
+
+### Prevention Mode
+Once users are comfortable with the agent's behavior, they can enable **prevention mode** to actively block malicious activities. This mode ensures that the system is protected against threats in real time. Review the configuration file to move from Detection mode to Prevention mode.
+
+For more information about event logs and how to interpret them, refer to the [Logs Overview](./docs/Logs.md) documentation.
+
+---
+
 ## Installer Supported Commands
 
 ### Install
@@ -165,13 +188,6 @@ Below is a list of available protection plugins, along with links to their detai
 ./nano_agent_installer -h | --help
 ```
 - Displays this help message.
-
----
-
-## Platforms Supported
-- **x86**       x86_64 systems
-- **aarch64**   ARM64 systems
-- **arm32**     ARMv7l or ARMv6l systems
 
 ---
 
