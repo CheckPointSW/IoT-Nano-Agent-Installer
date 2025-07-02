@@ -26,7 +26,7 @@ For more detailed information, please visit the full documentation of [QUANTUM I
 
 ---
 
-## Supported Platforms and Requirements
+## Supported Platforms and System Requirements
 
 The IoT Nano Agent trial version supports the following platforms and has specific system requirements:
 
@@ -38,6 +38,7 @@ The IoT Nano Agent trial version supports the following platforms and has specif
 > **Note:** These are the requirements for the trial version. The **full version supports additional platforms and architectures**.
 The installer will automatically download the installation file based on the detected platform.
 It also checks for required utilities and libraries and will alert you in case any are missing.
+> 
 > **Note(*):** RAM consumption might be higher at certain platforms, when workload protection enforces on many applications
 
 ---
