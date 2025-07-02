@@ -1,20 +1,21 @@
-# Logs Overview
+# Logs and Events Overview
 
-The IoT Nano Agent generates various logs to help monitor and troubleshoot its functionality. Below is an overview of the key logs and their purposes.
+The IoT Nano Agent generates various logs and events to help monitor and troubleshoot its functionality. 
 
 ---
 
 ## Orchestration Log (`orchestration.log`)
 
-The `orchestration.log` file is the primary log for the IoT Nano Agent and provides detailed information about the agent's operations. It is located at:
+The `orchestration.log` file is the primary log file for the IoT Nano Agent and provides detailed information about the agent's operations. It is located at:
 ```sh
 /var/log/nano_agent/cp-nano-orchestration.log
 ```
 
-### Incident Log Overview
+### Incident Log Overview - Event
 The `orchestration.log` includes incident logs that provide critical details about detected security events. Each incident log entry is formatted as a JSON object and contains the following key information:
 - **Event Time**: The exact time the incident occurred.
 - **Event Name**: A descriptive name for the security event, including the type of protection and the command or process involved.
+- **Event Code**: A unique identifier for this type of security event in a format of 015-[0-9].
 - **Event Severity**: The severity level of the incident (e.g., Critical).
 - **Event Priority**: The priority level of the incident (e.g., High).
 - **Event Type**: The type of event (e.g., Event Driven).
@@ -26,7 +27,8 @@ Example log entry:
 ```json
 {
   "eventTime": "2022-03-09T16:34:39.001",
-  "eventName": "Workload Protection Zero-Day Protection :: Shell Injection :: /tmp/wlp/etc/cp/workloadProtection/samples/antisi.sample :: Command: ping -c 1 8.8.8.8;echo",
+  "eventName": "IoT Embedded: Command Injection Blocked :: Shell Injection :: <PROCESS NAME> :: Command: ping -c 1 8.8.8.8;echo",
+  "eventCode": "015-0001",
   "eventSeverity": "Critical",
   "eventPriority": "High",
   "eventType": "Event Driven",
@@ -53,11 +55,13 @@ Example log entry:
 
 These logs are essential for understanding and responding to security incidents.
 
+To get updates on new Events, use Linux inotify tool on the log file itself. syslog and Cloud logging are supported in the premium edition of the Nano agent.
+
 ---
 
 ## Workload Protection Log (`wlp_log.txt`)
 
-The `wlp_log.txt` file is located in `/tmp/` and provides additional runtime information about the Nano Agent's workload protection activities. It is useful for debugging and verifying the agent's behavior during application execution.
+The `wlp_log.txt` file is located in `/tmp/` and provides additional runtime information about the Nano Agent's workload protection activities. It is useful for debugging and verifying the agent's behavior during application execution. Maximum size for this file is 1MB.
 
 ---
 
