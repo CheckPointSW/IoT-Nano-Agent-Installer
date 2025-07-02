@@ -30,7 +30,7 @@ For more detailed information, please visit the full documentation of [QUANTUM I
 
 The IoT Nano Agent trial version supports the following platforms and has specific system requirements:
 
-| Platform   | Architecture            | Required `glibc` Version | Minimum Disk Space | Minimum RAM |
+| Platform   | Architecture            | Required `glibc` Version | Minimum Disk Space | Minimum runtime RAM |
 |------------|-------------------------|--------------------------|--------------------|-------------|
 | **x86_64** | 64-bit Intel/AMD systems | > 2.23                  | 30 MB             | 8 MB        |
 | **aarch64**| ARM64 systems            | > 2.28                  | 30 MB             | 8 MB        |
