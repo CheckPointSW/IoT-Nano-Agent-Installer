@@ -28,44 +28,64 @@ Follow the steps below to enable the SSH Audit plugin:
 ---
 
 ### Step 2: Add `LD_PRELOAD` to the SSH Service
-The Nano Agent requires the `LD_PRELOAD` environment variable to be set for the SSH service. Depending on your system's initialization method, follow one of the options below:
+The Nano Agent requires the `LD_PRELOAD` environment variable to be set for the SSH service.
 
-#### Option 1: Using `systemd`
-1. Identify the SSH service running on your system:
+**Note:** This section varies significantly between systems, and there isn't an exact command to execute. That is why the instructions are written as general directives to accommodate different system configurations.
+
+#### Option 1: Systems Utilizing `systemd`
+1. Identify the SSH service:
+   Run the following command to list SSH-related services:
    ```sh
-   systemctl list-units --type=service | grep -i ssh
+   systemctl list-unit-files | grep -Ei "ssh|dropbear"
    ```
-   This will display any SSH-related services (e.g., `sshd`, `dropbear`).
+   This will show services like `sshd.service`, `dropbear.service` or `ssh@.service`.
 
-2. Edit the corresponding service file:
-   - For OpenSSH (`sshd`):
-     ```sh
-     sudo nano /lib/systemd/system/ssh.service
-     ```
-   - For Dropbear:
-     ```sh
-     sudo nano /lib/systemd/system/dropbear.service
-     ```
-   > **Note:** The file name might be slightly different, such as `sshd.service` or include an `@`, such as `dropbear@.service`.
+   - If you see `@` in the service name, it is a template service used for per-connection servers. Modifying the template applies changes to all new instances.
 
-3. Add or modify the `Environment` variable in the `[Service]` section:
+2. Add `LD_PRELOAD` to the service:
+   Edit the service configuration:
    ```sh
+   sudo systemctl edit <service_filename>
+   ```
+   Add the following lines to the override file:
+   ```ini
+   [Service]
    Environment="LD_PRELOAD=libwlp-core.so"
    ```
-   > **Note:** If the `Environment` variable already exists, you can add this line separately, and it will append `LD_PRELOAD` to the environment without overwriting existing variables.
+   Save and close the editor.
 
-4. Save the file and reload the systemd configuration:
-   ```sh
-   sudo systemctl daemon-reload
-   sudo systemctl restart ssh
-   ```
-   For Dropbear, use:
-   ```sh
-   sudo systemctl daemon-reload
-   sudo systemctl restart dropbear*
+   #### Example for Editing Dropbear Template
+   ```ini
+   ### Editing /etc/systemd/system/dropbear@.service.d/override.conf
+   ### Anything between here and the comment below will become the contents of the drop-in file
+
+   [Service]
+   Environment="LD_PRELOAD=libwlp-core.so"
+
+   ### Edits below this comment will be discarded
+
+   # [Unit]
+   # Description=SSH Per-Connection Server
+   # Wants=dropbearkey.service
+   # After=syslog.target dropbearkey.service
+   #
+   # [Service]
+   # Environment="DROPBEAR_RSAKEY_DIR=/etc/dropbear"
+   # EnvironmentFile=-/etc/default/dropbear
+   # ExecStart=-/usr/sbin/dropbear -i -r ${DROPBEAR_RSAKEY_DIR}/dropbear_rsa_host_key  $DROPBEAR_EXTRA_ARGS
+   # ExecReload=/bin/kill -HUP $MAINPID
+   # StandardInput=socket
+   # KillMode=process
    ```
 
-#### Option 2: Using `init.d`
+3. Restart the service:
+   ```sh
+   sudo systemctl restart <service_filename>
+   ```
+   > **Note:** Restarting is not required for template services like `ssh@.service`.
+
+
+#### Option 2: Systems Utilizing `init.d`
 1. Locate the SSH startup script:
    - For OpenSSH:
      ```sh
@@ -89,7 +109,6 @@ The Nano Agent requires the `LD_PRELOAD` environment variable to be set for the 
    ```sh
    sudo /etc/init.d/dropbear restart
    ```
-
 ---
 
 ### Step 3: Verify SSH Audit Functionality
