@@ -142,19 +142,13 @@ Below is a list of available protection plugins, along with links to their detai
 5. [File Monitor](./docs/File_Monitor.md)  
    Monitors and blocks unauthorized access to files and attempts to manipulate executables at runtime.
 
----
+### Configuration, Events, and Logs
+For detailed information about configuration, events, and logs, refer to:
+- [Configuration Guide](./docs/Configuration.md)
+- [Logs Overview](./docs/Logs.md)
 
-## Using Nano Agent
-
-The IoT Nano Agent is designed to both prevent attacks and inform users about potential security events. 
-
-### Detection Mode
-Upon installation, the Nano Agent is configured in **detection mode** by default. This allows users to explore and understand how the agent monitors and logs events without immediately affecting the system's behavior. Detection mode is ideal for observing the agent's capabilities and ensuring compatibility with your applications.
-
-### Prevention Mode
-Once users are comfortable with the agent's behavior, they can enable **prevention mode** to actively block malicious activities. This mode ensures that the system is protected against threats in real time. Review the configuration file to move from Detection mode to Prevention mode.
-
-For more information about event logs and how to interpret them, refer to the [Logs Overview](./docs/Logs.md) documentation.
+### Full Documentation
+For the complete documentation, visit the [Nano Agent Documentation](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Quantum-IoT-Nano-Agent-Installation/Default.htm).
 
 ---
 
