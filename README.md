@@ -70,7 +70,7 @@ sudo ./iot_nano_agent_installer.sh install
 
 ### Option 2: Clone the Repository
 ```sh
-git clone git@github.com:romanlo993/IoT-Nano-Agent-Installer.git
+git clone git@github.com:CheckPointSW/IoT-Nano-Agent-Installer.git
 cd IoT-Nano-Agent-Installer
 sudo ./iot_nano_agent_installer.sh install
 ```
@@ -205,7 +205,7 @@ For more information about event logs and how to interpret them, refer to the [L
 ## File Structure
 - **iot_nano_agent_installer**: Main shell script.
 - Manifest files per platform are expected under:  
-  `https://raw.githubusercontent.com/romanlo993/IoT-Nano-Agent-Installer/main/manifests/<platform>`
+  `https://raw.githubusercontent.com/CheckPointSW/IoT-Nano-Agent-Installer/main/manifests/<platform>`
 - Nano Agent packages are fetched as `.sh` installers via GitHub Releases.
 
 ---
@@ -236,4 +236,4 @@ Email us: [iot-device-security@checkpoint.com](iot-device-security@checkpoint.co
 
 ---
 
-> For any issues, please contact the maintainer or raise an issue on [GitHub](https://github.com/romanlo993/IoT-Nano-Agent-Installer).
+> For any issues, please contact the maintainer or raise an issue on [GitHub](https://github.com/CheckPointSW/IoT-Nano-Agent-Installer).
