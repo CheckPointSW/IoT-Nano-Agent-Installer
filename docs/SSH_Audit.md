@@ -40,7 +40,7 @@ The Nano Agent requires the `LD_PRELOAD` environment variable to be set for the 
    ```
    This will show services like `sshd.service`, `dropbear.service` or `ssh@.service`.
 
-   - If you see `@` in the service name, it is a template service used for per-connection servers. Modifying the template applies changes to all new instances.
+   - If you see `@` in the service name, it is a template service used for per-connection servers. Modifying the template will apply protection to all new instances of the service.
 
 2. Add `LD_PRELOAD` to the service:
    Edit the service configuration:
