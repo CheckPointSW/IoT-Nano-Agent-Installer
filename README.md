@@ -32,8 +32,8 @@ The IoT Nano Agent trial version supports the following platforms and has specif
 
 | Platform   | Architecture            | Required `glibc` Version | Minimum Disk Space | Minimum Runtime RAM |
 |------------|-------------------------|--------------------------|--------------------|-------------|
-| **x86_64** | 64-bit Intel/AMD systems | > 2.23                  | 30 MB             | 60 MB (*)    |
-| **aarch64**| ARM64 systems            | > 2.28                  | 30 MB             | 50 MB (*)    |
+| **x86_64** | 64-bit Intel/AMD systems | > 2.23                  | 36 MB             | 35 MB (*)    |
+| **aarch64**| ARM64 systems            | > 2.28                  | 30 MB             | 35 MB (*)    |
 
 > **Note:** These are the requirements for the trial version. The **full version supports additional platforms and architectures**.
 The installer will automatically download the installation file based on the detected platform.
